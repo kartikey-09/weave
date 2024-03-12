@@ -1,0 +1,46 @@
+.bookSession_bg::before {
+    content: "";
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+    animation: zoom 6s infinite alternate;
+    background-image: url("https://res.cloudinary.com/ddffeufbq/image/upload/v1699335989/webdesys/IMG_8029-scaled_iun1z6.webp");
+
+}
+
+@media (max-width: 700px) {
+    .bookSession_bg::before {
+        animation: none;
+    }
+}
+
+
+.bookSession_bg::after {
+    content: "";
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.9;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes zoom {
+    0% {
+        background-size: 100%;
+    }
+
+    100% {
+        background-size: 120%;
+    }
+}

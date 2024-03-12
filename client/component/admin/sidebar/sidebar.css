@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500&display=swap');
+
+.mainContainer {
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    /* width: 100vw; */
+    height: 100vh!important;
+    width: 100%;
+}
+
+main {
+    width: 100%;
+}
+
+.sidebar {
+    flex: 0 0 auto;
+    background: #242424;
+    color: #fff;
+    overflow-y: hidden;
+    width: auto;
+    /* transition: all 5s; */
+    transition: all 0.5s;
+    padding-bottom: 5rem;
+}
+.content {
+    flex: 1; /* Grow to fill remaining space */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+.top_section {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 15px 15px;
+    border-bottom: 2px solid white;
+    margin-bottom: 10px;
+}
+
+.logout_section {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+}
+
+.logo {
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.bars {
+    display: flex;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fff;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+}
+
+.link:hover {
+    background: white;
+    color: #000;
+    font-weight: 500;
+    transition: all 0.5s;
+}
+
+.active {
+    background: white;
+    color: black;
+    font-weight: 500;
+}
+
+.icon,
+.link_text {
+    font-size: 15px;
+}
+.manageuser_bg::before {
+    content: "";
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    background-image: url("https://images.unsplash.com/photo-1638864616275-9f0b291a2eb6?q=80&w=3328&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+
+}
+.imgg {
+    width: 32px !important;
+    height: 32px !important;
+}

@@ -1,0 +1,97 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  MONGO_URL: ${{ secrets.MONGO_URL }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  PORT: ${{ secrets.PORT }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+  Img_Folder_Name: ${{ secrets.Img_Folder_Name }}
+  Gallery_Img_Folder_Name: ${{ secrets.Gallery_Img_Folder_Name }}
+  SMTP_HOST: ${{ secrets.SMTP_HOST }}
+  SMTP_PORT: ${{ secrets.SMTP_PORT }}
+  SMTP_SERVICE: ${{ secrets.SMTP_SERVICE }}
+  SMTP_SENDER_EMAIL: ${{ secrets.SMTP_SENDER_EMAIL }}
+  SMTP_SENDER_PASSWORD: ${{ secrets.SMTP_SENDER_PASSWORD }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Install dependencies and run tests for the client application
+      - name: Install and Test Client
+        working-directory: ./client
+        run: |
+          npm install
+         
+
+      # Install dependencies, export environment variables, and run tests for the server application
+      - name: Install and Test Server
+        working-directory: ./server
+        run: |
+          npm install
+          export MONGO_URL=$MONGO_URL
+          export DB_NAME=$DB_NAME
+          export PORT=$PORT
+          export JWT_SECRET=$JWT_SECRET
+          export CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME
+          export CLOUDINARY_API_KEY=$CLOUDINARY_API_KEY
+          export CLOUDINARY_API_SECRET=$CLOUDINARY_API_SECRET
+          export Img_Folder_Name=$Img_Folder_Name
+          export Gallery_Img_Folder_Name=$Gallery_Img_Folder_Name
+          export SMTP_HOST=$SMTP_HOST
+          export SMTP_PORT=$SMTP_PORT
+          export SMTP_SERVICE=$SMTP_SERVICE
+          export SMTP_SENDER_EMAIL=$SMTP_SENDER_EMAIL
+          export SMTP_SENDER_PASSWORD=$SMTP_SENDER_PASSWORD
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        
+      # Build a Docker image for the client application
+      - name: Build Client Docker Image
+        working-directory: ./client
+        run: |
+          docker build -t techwebdesys/weavecu-frontend:master .
+          docker push techwebdesys/weavecu-frontend:master
+          
+      # Build a Docker image for the server application
+      - name: Build Server Docker Image
+        working-directory: ./server
+        run: |
+          docker build -t techwebdesys/weavecu-backend:master .
+          docker push techwebdesys/weavecu-backend:master
+
+      - name: Debug Environment Variables
+        run: |
+          echo "MONGO_URL: $MONGO_URL"
+          echo "PORT: $PORT"
+          echo "JWT_SECRET: $JWT_SECRET"
+          echo "DB_NAME: $DB_NAME"
+
+      # SSH into server and deploy with Docker Compose
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+            cd /var/www/weavecu/weavecu_master
+            docker-compose down
+            docker-compose pull
+            docker-compose up -d

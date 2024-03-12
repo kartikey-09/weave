@@ -1,0 +1,40 @@
+
+.gover_noti {
+    /* scroll-behavior: smooth; */
+    --scrollbar-width: 0px;
+    --scrollbar-height: 0px;
+    --scrollbar-border-radius: 0px;
+    --scrollbar-border-thickness: 0px;
+    --scrollbar-thumb-color: #efefef;
+    --scrollbar-track-color: #efefef;
+}
+
+.gover_noti::-webkit-scrollbar {
+    width: var(--scrollbar-width, 20px);
+    height: var(--scrollbar-height, 20px);
+}
+
+.gover_noti::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color, #efefef);
+    border: var(--scrollbar-border-thickness, 3px) solid var(--scrollbar-border-color, rgb(255, 255, 255));
+    border-radius: var(--scrollbar-border-radius, 4px);
+}
+
+.gover_noti::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-color, #A1A1AA);
+}
+
+.gover_noti::-webkit-scrollbar-corner {
+    background: var(--scrollbar-corner-color, #FFFFFF);
+    border: var(--scrollbar-border-thickness, 3px) solid var(--scrollbar-border-color, rgb(255, 255, 255));
+    border-radius: var(--scrollbar-border-radius, 4px);
+}
+
+.gover_noti::-webkit-scrollbar-button:vertical:start:increment,
+#preview::-webkit-scrollbar-button:vertical:end:decrement,
+#preview::-webkit-scrollbar-button:horizontal:start:increment,
+#preview::-webkit-scrollbar-button:horizontal:end:decrement {
+    display: var(--show-double-buttons, none);
+}
+
+/* scroll bar animation ends */

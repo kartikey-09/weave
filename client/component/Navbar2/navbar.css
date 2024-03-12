@@ -1,0 +1,37 @@
+.cool-link {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.cool-link::after {
+    content: '';
+    display: block;
+    /* margin-top: 2px; */
+    width: 0;
+    height: 2px;
+    /* background: blue; */
+    transition: width .3s;
+}
+
+.cool-link:hover::after {
+    width: 100%;
+}
+
+.white-link {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.white-link::after {
+    content: '';
+    display: block;
+    /* margin-top: 2px; */
+    width: 0;
+    height: 2px;
+    /* background: white; */
+    transition: width .3s;
+}
+
+.white-link:hover::after {
+    width: 100%;
+}

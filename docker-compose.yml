@@ -1,0 +1,33 @@
+version: '3'
+services:
+  
+  client:
+    image: techwebdesys/weavecu-frontend:master
+    ports:
+     - "6000:3000"
+    depends_on:
+     - server 
+
+  server:
+    image: techwebdesys/weavecu-backend:master
+    ports:
+      - "9000:9000"
+    environment:
+      - MONGO_URL=${MONGO_URL}
+      - DB_NAME=${DB_NAME}
+      - PORT=${PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - Img_Folder_Name=${Img_Folder_Name}
+      - Gallery_Img_Folder_Name=${Gallery_Img_Folder_Name}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_SERVICE=${SMTP_SERVICE}
+      - SMTP_SENDER_EMAIL=${SMTP_SENDER_EMAIL}
+      - SMTP_SENDER_PASSWORD=${SMTP_SENDER_PASSWORD}
+    
+
+  
+

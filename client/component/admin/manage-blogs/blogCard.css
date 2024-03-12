@@ -1,0 +1,29 @@
+.custom-container {
+    max-width: 30rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    margin-bottom: 16px;
+    padding-top: 2rem;
+    position: relative;
+}
+
+.custom-container::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-image: linear-gradient(to top, #4f46e5, #886aea) !important; 
+    border-radius: 20px;
+    transition: all 0.5s;
+    z-index: -10;
+}
+
+.custom-container:hover::before {
+    height: 100%;
+}
+
+.group:hover .custom-container::before {
+    height: 100%;
+}
